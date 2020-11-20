@@ -1,0 +1,12 @@
+.header {
+    justify-content: space-between;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.hamburger {
+    margin-top: 5px;
+    cursor: pointer;
+}

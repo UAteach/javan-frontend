@@ -1,0 +1,28 @@
+<div fxFlex="10">
+
+</div>
+
+<div class="content" fxFlex="80" >
+    <H1>Your Reservations</H1>
+    <hr>
+
+    <div class="cards" fxLayout="row wrap" fxLayoutAlign="center start">
+
+        <div *ngFor="let order of orders">
+            <mat-card>
+                <p>{{order.bin_number}}</p>
+            </mat-card>
+        </div>
+    
+        <mat-card>
+            <p>Request New order</p>
+        </mat-card>
+    </div>
+
+</div>
+
+
+
+
+
+
