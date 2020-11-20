@@ -9,9 +9,8 @@
     <div class="cards" fxLayout="row wrap" fxLayoutAlign="center start">
 
         <div *ngFor="let order of orders">
-            <mat-card>
-                <p>{{order.bin_number}}</p>
-            </mat-card>
+            <app-order-card [Order]="order">
+            </app-order-card>
         </div>
     
         <mat-card>

@@ -13,6 +13,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialsHomePageComponent } from './materials-home-page/materials-home-page.component';
+import { MaterialsOrderPageComponent } from './materials-order-page/materials-order-page.component';
+import { ErrorPageComponent } from './shared/error-page/error-page.component';
+import { MaterialsListComponent } from './components/materials-list/materials-list.component';
+import { OrderCardComponent } from './components/order-card/order-card.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +24,10 @@ import { MaterialsHomePageComponent } from './materials-home-page/materials-home
     LoginPageComponent,
     NavComponent,
     MaterialsHomePageComponent,
+    MaterialsOrderPageComponent,
+    ErrorPageComponent,
+    MaterialsListComponent,
+    OrderCardComponent,
   ],
   imports: [
     BrowserModule,

@@ -20,7 +20,7 @@ export class OrderService {
   }
 
   getOrderById(id: number): Observable<OrderDTO>{
-    return this._api.get<OrderDTO>(OrderService.APIPATHPREFIX + id);
+    return this._api.get<OrderDTO>(OrderService.APIPATHPREFIX + id + '/');
   }
 
   getOrdersForCurrentUser(): Observable<OrderDTO[]>{

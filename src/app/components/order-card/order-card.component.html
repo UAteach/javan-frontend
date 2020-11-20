@@ -1,0 +1,18 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Bin # {{Order.bin_number}}</mat-card-title>
+        <mat-card-subtitle>Order # {{Order.id}}</mat-card-subtitle>
+        
+    </mat-card-header>
+    
+    <mat-card-content>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button mat-flat-button color="primary" [routerLink]="['/materials/order', Order.id]">
+            edit
+        </button>
+    </mat-card-actions>
+    
+</mat-card>
