@@ -31,6 +31,7 @@ export class MaterialsOrderPageComponent implements OnInit {
     this.user = this._authService.getUserInfo();
 
     this._route.params.subscribe(params => {
+      this.id = +params['id'];
       this._orderService.getOrderById(+params['id']).subscribe(order =>{
         this.order = order;
 
@@ -41,10 +42,7 @@ export class MaterialsOrderPageComponent implements OnInit {
 
       })
 
-      this._orderService.getOrderContentsByOrder(+params['id']).subscribe(contents => {
-        this.orderContents = contents;
-        console.log(this.orderContents)
-      })
+      this.updateOrderContents();
     });
 
     this._itemsService.getAll().subscribe(items => {
@@ -52,6 +50,16 @@ export class MaterialsOrderPageComponent implements OnInit {
     })
 
   }
+
+
+  updateOrderContents() {
+  
+    this._orderService.getOrderContentsByOrder(this.id).subscribe(contents => {
+      this.orderContents = contents;
+      console.log(this.orderContents)
+    })
+  }
+
 
 }
 

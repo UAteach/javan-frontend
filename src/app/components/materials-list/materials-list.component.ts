@@ -1,10 +1,12 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ThrowStmt } from '@angular/compiler';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { emit } from 'process';
 import { ItemDTO, OrderContentDTO } from 'src/app/models';
 import { OrderService } from 'src/app/services';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
@@ -25,6 +27,10 @@ export class MaterialsListComponent implements OnInit {
     this.items.paginator = this.paginator;
     this.items.sort = this.sort;
   }
+
+    
+  @Output() ItemAdded = new EventEmitter();
+
 
   displayedColumns: string[] = ['name', 'category', 'location', 'action'];
 
@@ -68,6 +74,7 @@ export class MaterialsListComponent implements OnInit {
       orderContent.other_notes = data.notes;
 
       this._orderService.postOrderContent(orderContent).subscribe(response => {
+        this.ItemAdded.emit();
         console.log("item added")
         console.log(response);
         this.openSnackBar("Item added", null);
@@ -109,3 +116,5 @@ export class MaterialsListComponent implements OnInit {
   }
 
 }
+
+

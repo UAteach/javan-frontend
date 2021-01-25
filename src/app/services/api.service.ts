@@ -43,7 +43,7 @@ export class ApiService {
     // return this.http.post<T>(this.getUrl(relativeUrl), body);
 
     if (this._authService.isAuthenticated){
-      debugger
+      
       let headers_object = new HttpHeaders()
               .set('Authorization', "JWT " + this._authService.getToken())
               .set('Content-Type', 'application/json'); 
