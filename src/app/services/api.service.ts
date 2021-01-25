@@ -40,7 +40,18 @@ export class ApiService {
   }
 
   post<T>(relativeUrl: string, body: any): Observable<T> {
-    return this.http.post<T>(this.getUrl(relativeUrl), body);
+    // return this.http.post<T>(this.getUrl(relativeUrl), body);
+
+    if (this._authService.isAuthenticated){
+      debugger
+      let headers_object = new HttpHeaders()
+              .set('Authorization', "JWT " + this._authService.getToken())
+              .set('Content-Type', 'application/json'); 
+
+      return this.http.post<T>(this.getUrl(relativeUrl), body, { headers: headers_object });
+    }else{
+      return null
+    }
   }
 
   put<T>(relativeUrl: string, body?: any): Observable<T> {

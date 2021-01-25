@@ -7,6 +7,8 @@ import { ApiService } from './api.service';
   providedIn: 'root'
 })
 export class UserService {
+  public userName = new Subject<string>();
+
   private static readonly APIPATHPREFIX: string = 'core/';
 
   constructor(private _api: ApiService) { }
@@ -27,11 +29,12 @@ export class UserService {
 
       this.getCurrentUser().subscribe(user => {
         localStorage.setItem('userInfo', JSON.stringify(user));
+        this.userName.next(user.first_name);
+        result.next(true);
       })
 
-      result.next(true);
-
     }, error => {
+      this.userName.next('Login');
       result.next(false);
 
     })

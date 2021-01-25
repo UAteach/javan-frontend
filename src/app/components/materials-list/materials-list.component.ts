@@ -1,5 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ItemDTO } from 'src/app/models';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
+import { ItemDTO, OrderContentDTO } from 'src/app/models';
+import { OrderService } from 'src/app/services';
+import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 
 @Component({
   selector: 'app-materials-list',
@@ -8,12 +16,96 @@ import { ItemDTO } from 'src/app/models';
 })
 export class MaterialsListComponent implements OnInit {
 
-  @Input() Items: ItemDTO[];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
-  constructor() { }
+  items: MatTableDataSource<ItemDTO>;
+  @Input() set Items(value: ItemDTO[]){
+    this.items = new MatTableDataSource<ItemDTO>(value);
+    this.items.paginator = this.paginator;
+    this.items.sort = this.sort;
+  }
+
+  displayedColumns: string[] = ['name', 'category', 'location', 'action'];
+
+  private orderNumber: number = null;
+
+  constructor(
+    public dialog: MatDialog,
+    private _snackBar: MatSnackBar,
+    private _orderService: OrderService,
+    private _route: ActivatedRoute
+  ) { 
+    this._route.params.subscribe(params => {
+      this.orderNumber = +params['id'];
+    });
+  }
 
   ngOnInit(): void {
     
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.items.filter = filterValue.trim().toLowerCase();
+
+    if (this.items.paginator) {
+      this.items.paginator.firstPage();
+    }
+  }
+
+
+  addToOrder(data){
+    if (this.orderNumber) {
+      let orderContent = new OrderContentDTO();
+
+      orderContent.order = this.orderNumber;
+
+      orderContent.item = data.id;
+  
+      orderContent.name = data.name;
+      orderContent.quantity = data.quantity;
+      orderContent.other_notes = data.notes;
+
+      this._orderService.postOrderContent(orderContent).subscribe(response => {
+        console.log("item added")
+        console.log(response);
+        this.openSnackBar("Item added", null);
+      }, error => console.error(error));
+    }else {
+      this.openSnackBar("Failed to add item", null);
+    }
+  }
+
+  openDialog(action, obj) {
+    obj.action = action;
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      width: '50%',
+      height: '500px',
+      data: obj
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.event == 'Details-Add'){
+        this.addToOrder(result.data);
+        // this.deleteRowData(result.data);
+      }else{
+
+      }
+      // if(result.event == 'Add'){
+      //   this.addRowData(result.data);
+      // }else if(result.event == 'Update'){
+      //   this.updateRowData(result.data);
+      // }else if(result.event == 'Delete'){
+      //   this.deleteRowData(result.data);
+      // }
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
 }

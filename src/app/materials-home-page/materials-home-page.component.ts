@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { OrderDTO } from '../models';
 import { OrderService } from '../services/order.service';
+import { NavComponent } from '../shared/nav/nav.component';
 
 @Component({
   selector: 'app-materials-home-page',
@@ -8,6 +9,8 @@ import { OrderService } from '../services/order.service';
   styleUrls: ['./materials-home-page.component.scss']
 })
 export class MaterialsHomePageComponent implements OnInit {
+  @ViewChild(NavComponent) nav : NavComponent; 
+
 
   public orders: OrderDTO[];
 
@@ -21,6 +24,7 @@ export class MaterialsHomePageComponent implements OnInit {
       this.orders = orders;
       console.log(this.orders)
     });
+
   }
 
 }

@@ -3,12 +3,18 @@
 </div>
 
 <div class="content" fxLayout="row">
-    <div class="search-box" fxFlex="400px">
-
-    </div>
     <div class="materials-box" fxFlex="80">
+        <h1>Available Materials</h1>
+
+        <hr style="width: 100%;">
+
         <app-materials-list [Items]="items">
         </app-materials-list>
+    </div>
+
+    <div class="order-details-box" fxFlex="400px">
+        <app-order-content [OrderContent]="orderContents">
+        </app-order-content>
     </div>
 </div>
 

@@ -5,7 +5,7 @@ import { UserDTO } from '../models';
 @Injectable({
     providedIn: 'root'
   })
-export class AuthService {z
+export class AuthService {
 
   constructor(
     private _jwtHelper: JwtHelperService,
@@ -26,6 +26,13 @@ export class AuthService {z
   public isAuthenticated(): boolean {
     const token = this.getToken();
     return !this._jwtHelper.isTokenExpired(token);
+  }
+  
+  // see UserService for authenticating user (logging in)
+
+  public logout(){
+    // destroys local storage
+    localStorage.clear();
   }
 
 }

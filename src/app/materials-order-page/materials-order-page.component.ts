@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ItemDTO, OrderDTO, UserDTO } from '../models';
+import { ItemDTO, OrderContentDTO, OrderDTO, UserDTO } from '../models';
 import { AuthService } from '../services/auth.service';
 import { ItemsService, OrderService } from '../services';
 
@@ -17,6 +17,7 @@ export class MaterialsOrderPageComponent implements OnInit {
 
   id: number;
   order: OrderDTO;
+  orderContents: OrderContentDTO[];
 
   constructor(
     private _route: ActivatedRoute,
@@ -38,7 +39,11 @@ export class MaterialsOrderPageComponent implements OnInit {
           this._router.navigateByUrl('/error');
         }
 
-        console.log(this.order);
+      })
+
+      this._orderService.getOrderContentsByOrder(+params['id']).subscribe(contents => {
+        this.orderContents = contents;
+        console.log(this.orderContents)
       })
     });
 

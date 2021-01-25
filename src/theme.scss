@@ -77,7 +77,7 @@ $md-grey: (
 /* ======== angular material custom theme ======== */
 $my-custom-primary: mat-palette($md-utch);
 $my-custom-accent: mat-palette($md-grey);
-$my-custom-warn: mat-palette($mat-lime);
+$my-custom-warn: mat-palette($md-grey);
 
 // Light theme
 $utch-theme: mat-light-theme($my-custom-primary, $my-custom-accent, $my-custom-warn);

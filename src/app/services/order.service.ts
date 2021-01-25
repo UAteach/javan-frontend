@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { OrderDTO } from '../models';
+import { OrderDTO, OrderContentDTO } from '../models';
 import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
 
@@ -42,4 +42,14 @@ export class OrderService {
   getOrderByBinNumber(bin: number): Observable<OrderDTO>{
     return this._api.get<OrderDTO>(OrderService.APIPATHPREFIX + '?bin_number=' + bin);
   }
+
+  // Order Contents
+  getOrderContentsByOrder(order: number): Observable<OrderContentDTO[]>{
+    return this._api.get<OrderContentDTO[]>(OrderService.APIPATHPREFIX + 'content/?order=' + order);
+  }
+
+  postOrderContent(orderContent: OrderContentDTO): Observable<OrderContentDTO>{
+    return this._api.post(OrderService.APIPATHPREFIX + 'content/', orderContent)
+  }
+
 }

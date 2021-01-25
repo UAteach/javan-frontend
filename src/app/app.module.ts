@@ -9,7 +9,7 @@ import { AngularMaterialModule } from './angular-material.module';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { NavComponent } from './shared/nav/nav.component';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialsHomePageComponent } from './materials-home-page/materials-home-page.component';
@@ -17,6 +17,8 @@ import { MaterialsOrderPageComponent } from './materials-order-page/materials-or
 import { ErrorPageComponent } from './shared/error-page/error-page.component';
 import { MaterialsListComponent } from './components/materials-list/materials-list.component';
 import { OrderCardComponent } from './components/order-card/order-card.component';
+import { OrderContentComponent } from './components/order-content/order-content.component';
+import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { OrderCardComponent } from './components/order-card/order-card.component
     ErrorPageComponent,
     MaterialsListComponent,
     OrderCardComponent,
+    OrderContentComponent,
+    DialogBoxComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,8 +41,7 @@ import { OrderCardComponent } from './components/order-card/order-card.component
     AngularMaterialModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    
-
+    FormsModule
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

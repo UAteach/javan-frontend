@@ -1,0 +1,48 @@
+<!-- <h1 mat-dialog-title>Row Action :: <strong>{{action}}</strong></h1>
+<div mat-dialog-content>
+  <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
+    <input placeholder="{{action}} Name" matInput [(ngModel)]="local_data.name">
+  </mat-form-field>
+  <ng-template #elseTemplate>
+    Sure to delete <b>{{local_data.name}}</b>?
+  </ng-template>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="doAction()">{{action}}</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+</div> -->
+
+<div *ngIf="action == 'Details-Add'">
+  <h1 mat-dialog-title>
+    Item Details
+  </h1>
+
+  <div mat-dialog-content>
+    <mat-list>
+      <mat-list-item> Name: {{local_data.name}} </mat-list-item>
+      <mat-list-item> Category: {{local_data.category}} </mat-list-item>
+      <mat-list-item> Location: {{local_data.location}} </mat-list-item>
+      <mat-list-item> Description: {{local_data.description}} </mat-list-item>
+    </mat-list>
+
+    <mat-form-field>
+      <mat-label>Needed Quantity</mat-label>
+      <input
+        matInput
+        type="number"
+        [(ngModel)]="local_data.quantity"/>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Additional Notes</mat-label>
+      <input 
+        matInput 
+        [(ngModel)]="local_data.notes"/>
+    </mat-form-field>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-flat-button color="primary" (click)="doAction()">{{action}}</button>
+    <button mat-button (click)="closeDialog()" mat-flat-button >Cancel</button>
+  </div>
+</div>
