@@ -10,6 +10,13 @@ export class OrderCardComponent implements OnInit {
 
   @Input() Order: OrderDTO;
 
+  EditableOrderStatuses = [
+    'STARTED',
+    'PLACED',
+    'UPDATED',
+    'FILLED'
+  ]
+
   constructor() { }
 
   ngOnInit(): void {

@@ -19,6 +19,8 @@ import { MaterialsListComponent } from './components/materials-list/materials-li
 import { OrderCardComponent } from './components/order-card/order-card.component';
 import { OrderContentComponent } from './components/order-content/order-content.component';
 import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
+import { MaterialsReviewPageComponent } from './materials-review-page/materials-review-page.component';
+import { MaterialsViewInventoryPageComponent } from './materials-view-inventory-page/materials-view-inventory-page.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { DialogBoxComponent } from './components/dialog-box/dialog-box.component
     OrderCardComponent,
     OrderContentComponent,
     DialogBoxComponent,
+    MaterialsReviewPageComponent,
+    MaterialsViewInventoryPageComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,30 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ItemDTO, OrderContentDTO, OrderDTO, UserDTO } from '../models';
+import { OrderDTO, OrderContentDTO, UserDTO } from '../models';
+import { OrderService } from '../services';
 import { AuthService } from '../services/auth.service';
-import { ItemsService, OrderService } from '../services';
 
 @Component({
-  selector: 'app-materials-order-page',
-  templateUrl: './materials-order-page.component.html',
-  styleUrls: ['./materials-order-page.component.scss']
+  selector: 'app-materials-review-page',
+  templateUrl: './materials-review-page.component.html',
+  styleUrls: ['./materials-review-page.component.scss']
 })
-export class MaterialsOrderPageComponent implements OnInit {
+export class MaterialsReviewPageComponent implements OnInit {
 
   private user: UserDTO;
-  
-  items: ItemDTO[];
-  isLoading: boolean = true;
 
   id: number;
   order: OrderDTO;
   orderContents: OrderContentDTO[];
-  
+
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
     private _orderService: OrderService,
-    private _itemsService: ItemsService,
     private _authService: AuthService
   ) { }
 
@@ -42,20 +38,11 @@ export class MaterialsOrderPageComponent implements OnInit {
         }
       })
 
-      this.updateOrderContents();
+      this._orderService.getOrderContentsByOrder(this.id).subscribe(contents => {
+        this.orderContents = contents;
+        console.log(this.orderContents)
+      })
     });
-
-    this._itemsService.getAll().subscribe(items => {
-      this.items = items;
-      this.isLoading = false;
-    })
-  }
-
-  updateOrderContents() {
-    this._orderService.getOrderContentsByOrder(this.id).subscribe(contents => {
-      this.orderContents = contents;
-    })
   }
 
 }
-

@@ -42,7 +42,26 @@
 
   </div>
   <div mat-dialog-actions>
-    <button mat-button mat-flat-button color="primary" (click)="doAction()">{{action}}</button>
+    <button mat-button mat-flat-button color="primary" (click)="doAction()">Add to Order</button>
+    <button mat-button (click)="closeDialog()" mat-flat-button >Cancel</button>
+  </div>
+</div>
+
+<div *ngIf="action == 'OrderContent-Delete'">
+  <h1 mat-dialog-title>
+    Delete Item
+  </h1>
+
+  <div mat-dialog-content>
+    <mat-list>
+      <mat-list-item> Name: {{local_data.name}} </mat-list-item>
+      <mat-list-item> Category: {{local_data.category}} </mat-list-item>
+      <mat-list-item> Location: {{local_data.location}} </mat-list-item>
+      <mat-list-item> Description: {{local_data.description}} </mat-list-item>
+    </mat-list>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-flat-button color="primary" (click)="doAction()">Delete</button>
     <button mat-button (click)="closeDialog()" mat-flat-button >Cancel</button>
   </div>
 </div>

@@ -17,20 +17,17 @@ import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
   styleUrls: ['./materials-list.component.scss']
 })
 export class MaterialsListComponent implements OnInit {
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   items: MatTableDataSource<ItemDTO>;
   @Input() set Items(value: ItemDTO[]){
     this.items = new MatTableDataSource<ItemDTO>(value);
-    this.items.paginator = this.paginator;
+    setTimeout(() => this.items.paginator = this.paginator);
     this.items.sort = this.sort;
   }
-
     
   @Output() ItemAdded = new EventEmitter();
-
 
   displayedColumns: string[] = ['name', 'category', 'location', 'action'];
 
@@ -60,8 +57,22 @@ export class MaterialsListComponent implements OnInit {
     }
   }
 
+  openDialog(action, obj) {
+    obj.action = action;
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      width: '50%',
+      height: '500px',
+      data: obj
+    });
 
-  addToOrder(data){
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.event == 'Details-Add'){
+        this.addToOrder(result.data);
+      }
+    });
+  }
+
+  private addToOrder(data){
     if (this.orderNumber) {
       let orderContent = new OrderContentDTO();
 
@@ -74,42 +85,18 @@ export class MaterialsListComponent implements OnInit {
       orderContent.other_notes = data.notes;
 
       this._orderService.postOrderContent(orderContent).subscribe(response => {
-        this.ItemAdded.emit();
-        console.log("item added")
-        console.log(response);
+        this.ItemAdded.emit();    
         this.openSnackBar("Item added", null);
-      }, error => console.error(error));
+      }, error => {
+        console.error(error);
+        this.openSnackBar("Failed to add item", null);
+      });
     }else {
       this.openSnackBar("Failed to add item", null);
     }
   }
 
-  openDialog(action, obj) {
-    obj.action = action;
-    const dialogRef = this.dialog.open(DialogBoxComponent, {
-      width: '50%',
-      height: '500px',
-      data: obj
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result.event == 'Details-Add'){
-        this.addToOrder(result.data);
-        // this.deleteRowData(result.data);
-      }else{
-
-      }
-      // if(result.event == 'Add'){
-      //   this.addRowData(result.data);
-      // }else if(result.event == 'Update'){
-      //   this.updateRowData(result.data);
-      // }else if(result.event == 'Delete'){
-      //   this.deleteRowData(result.data);
-      // }
-    });
-  }
-
-  openSnackBar(message: string, action: string) {
+  private openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 2000,
     });

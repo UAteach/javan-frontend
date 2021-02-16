@@ -11,20 +11,18 @@ import { NavComponent } from '../shared/nav/nav.component';
 export class MaterialsHomePageComponent implements OnInit {
   @ViewChild(NavComponent) nav : NavComponent; 
 
-
   public orders: OrderDTO[];
+  public isLoading: boolean = true;
 
   constructor(
     private _orderService: OrderService
   ) { }
 
   ngOnInit(): void {
-    // TODO Loading spinner
     this._orderService.getOrdersForCurrentUser().subscribe(orders => {
       this.orders = orders;
-      console.log(this.orders)
+      this.isLoading = false;
     });
-
   }
 
 }

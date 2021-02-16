@@ -1,17 +1,45 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title>Bin # {{Order.bin_number}}</mat-card-title>
-        <mat-card-subtitle>Order # {{Order.id}}</mat-card-subtitle>
-        
+        <mat-card-title>Bin #{{Order.bin_number}}</mat-card-title>
+        <mat-card-subtitle>Order #{{Order.id}}</mat-card-subtitle>
     </mat-card-header>
+
+    <hr>
     
     <mat-card-content>
-        
+        <table>
+            <tr>
+                <th>Status:</th>
+                <td>{{Order.status || 'UNKNOWN'}}</td>
+            </tr>
+            <tr>
+                <th>Members:</th>
+                <td>
+                    <span *ngFor="let member of Order.members; let i = index" [attr.data-index]="i">
+                        {{member.first_name}} {{member.last_name}}{{(i != (Order.members.length - 1)) ? ',' : ' '}}
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <th>Master Teacher:</th>
+                <td>{{Order.master_teacher || 'UNKNOWN'}}</td>
+            </tr>
 
+            <tr>
+                <th>Pickup Date: </th>
+                <td>{{Order.expected_pickup_datetime || 'UNKNOWN'}}</td>
+            </tr>
+            <tr>
+                <th>Return Date:</th>
+                <td>{{Order.expected_return_datetime || 'UNKNOWN'}}</td>
+              </tr>
+          </table>
     </mat-card-content>
 
+    <hr>
+
     <mat-card-actions>
-        <button mat-flat-button color="primary" [routerLink]="['/materials/order', Order.id]">
+        <button mat-flat-button color="primary" [routerLink]="['/materials/order', Order.id]" *ngIf="EditableOrderStatuses.includes(Order.status)">
             Edit
         </button>
     </mat-card-actions>

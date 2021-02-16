@@ -1,20 +1,54 @@
-<div class="header">
-
+<div class="header" *ngIf="order">
+    <div class="header-left">
+       <p class="header-text" [routerLink]="['/materials/']"> &lt; Return to materials homepage</p> 
+    </div>
+    <div class="header-right">
+        <p class="header-text">Bin #{{order.bin_number}} <br>
+        Order #{{order.id}}
+        </p>        
+    </div>
 </div>
 
-<div class="content" fxLayout="row">
-    <div class="materials-box" fxFlex="80">
-        <h1>Available Materials</h1>
+<!-- <mat-spinner *ngIf="isLoading"></mat-spinner> -->
 
-        <hr style="width: 100%;">
+<div class="content" fxLayout="row" *ngIf="order">
+    <div class="materials-box">
+        <div class="bordered-box">
+            <h1>Search Available Materials</h1>
 
-        <app-materials-list [Items]="items" (ItemAdded)="updateOrderContents()">          
-        </app-materials-list>
+            <!-- <hr style="width: 100%;"> -->
+    
+            <app-materials-list [Items]="items" (ItemAdded)="updateOrderContents()">          
+            </app-materials-list>
+        </div>
     </div>
 
-    <div class="order-details-box" fxFlex="400px">
-        <app-order-content [OrderContent]="orderContents">
-        </app-order-content>
+    <div class="order-details-box" fxFlex="25%">    
+        <div class="bordered-box">
+            <h1>Requested Materials</h1>
+
+            <br>
+
+            <app-order-content style="width: 100%;" [OrderContent]="orderContents"></app-order-content>
+            <br>
+
+            <div class="centered-box">
+                <button mat-flat-button color="primary">
+                    Add Unlisted Item
+                </button>
+            </div>
+            <div class="centered-box">
+                <p>Not finding the item you need? Request an unlisted item!</p>
+            </div>
+            
+            <hr>
+
+            <div style="height: 40px;">
+                <button class="review-button" mat-flat-button color="primary" [routerLink]="['/materials/order/review', order.id]">
+                    Review & Submit
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 

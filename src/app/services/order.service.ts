@@ -52,4 +52,8 @@ export class OrderService {
     return this._api.post(OrderService.APIPATHPREFIX + 'content/', orderContent)
   }
 
+  deleteOrderContentById(id: number){
+    return this._api.delete(OrderService.APIPATHPREFIX + 'content/' + id + '/');
+  }
+
 }

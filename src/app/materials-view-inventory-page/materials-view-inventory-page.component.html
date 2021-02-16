@@ -1,0 +1,26 @@
+<div class="header" *ngIf="items">
+    <div class="header-left">
+       <p class="header-text" [routerLink]="['/materials/']"> &lt; Return to materials homepage</p> 
+    </div>
+</div>
+
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<div class="content" fxLayout="row" *ngIf="!isLoading">
+    <div class="materials-box">
+        <div class="bordered-box">
+            <h1>Search Available Materials</h1>
+
+            <!-- <hr style="width: 100%;"> -->
+    
+            <app-materials-list [Items]="items">          
+            </app-materials-list>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

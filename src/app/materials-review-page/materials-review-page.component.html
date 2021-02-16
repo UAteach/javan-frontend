@@ -1,0 +1,31 @@
+<div class="header" *ngIf="order">
+    <div class="header-left">
+       <p class="header-text" [routerLink]="['/materials/order/', order.id]"> &lt; Return to order</p> 
+    </div>
+    <div class="header-right">
+        <p class="header-text">Bin #{{order.bin_number}} <br>
+        Order #{{order.id}}
+        </p>        
+    </div>
+</div>
+
+<div fxLayout="row">
+    <div fxFlex="15"></div>
+
+    <div class="content" fxFlex="70" >
+        <H1>Order Review</H1>
+        <hr>
+    
+        <div fxLayout="row" layout-wrap style="width: 100%;">
+            <div class="left-column" flex="50">
+                <h1>{{order.id}}</h1>
+            </div>
+            <div class="right-column" flex="50">
+                <app-order-content [OrderContent]="orderContents"></app-order-content>
+            </div>
+        </div>
+    
+    </div>
+    
+    <div fxFlex="15"></div>
+</div>

@@ -59,7 +59,14 @@ export class ApiService {
   }
 
   delete(relativeUrl: string) {
-    return this.http.delete(this.getUrl(relativeUrl));
+    if (this._authService.isAuthenticated){  
+      let headers_object = new HttpHeaders()
+              .set('Authorization', "JWT " + this._authService.getToken()); 
+
+      return this.http.delete(this.getUrl(relativeUrl),{ headers: headers_object });
+    }else{
+      return null
+    }
   }
 
   buildPath(...parts: string[]) {
