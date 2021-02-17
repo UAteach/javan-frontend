@@ -1,24 +1,25 @@
 <div fxLayout="row" fxLayoutAlign="center center" class="row-height">
     <mat-card class="login-box" fxFlex="30%">
         <mat-card-title>Login</mat-card-title>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="loginForm" 
+              (keydown.enter)="onSubmit()" 
+              (ngSubmit)="onSubmit()">
             <mat-card-content fxLayout="column">
             
                 <mat-form-field appearance="fill" class="full-width">
-                    <mat-label>Username:</mat-label>
-                    <input formControlName="username"  matInput  placeholder="Email" name="email">
+                    <mat-label>Username</mat-label>
+                    <input formControlName="username"  matInput  placeholder="Username" name="username">
                 </mat-form-field>
                 
                 <mat-form-field appearance="fill" class="full-width">
-                    <mat-label>Enter your password</mat-label>
-                        <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
-                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                        </button>
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </mat-form-field>
-            
+
+                <button mat-raised-button color="primary" [disabled]="!loginForm.valid">Login</button>
             </mat-card-content>
-            <button mat-raised-button color="primary" [disabled]="!loginForm.valid">Login</button>
+            
         </form>
     </mat-card>
 </div>

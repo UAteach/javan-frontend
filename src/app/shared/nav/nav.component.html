@@ -2,6 +2,6 @@
     <div [routerLink]="['/materials/']">JAVAN</div>
     
     <span class="nav-tool-items">
-      <div *ngIf="userName">{{ userName }}</div>   
+      <div (click)="logout()" *ngIf="userName">{{ userName }}</div>
     </span>
 </mat-toolbar>
