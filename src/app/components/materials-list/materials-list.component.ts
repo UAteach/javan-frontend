@@ -26,6 +26,8 @@ export class MaterialsListComponent implements OnInit {
     setTimeout(() => this.items.paginator = this.paginator);
     this.items.sort = this.sort;
   }
+
+  @Input() viewOnly: boolean = false;
     
   @Output() ItemAdded = new EventEmitter();
 

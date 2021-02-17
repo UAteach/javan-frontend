@@ -12,6 +12,8 @@ export class MaterialsViewInventoryPageComponent implements OnInit {
   items: ItemDTO[];
   isLoading: boolean = true;
 
+  
+
   constructor(
     private _itemsService: ItemsService,
   ) { }

@@ -4,16 +4,15 @@
     </div>
 </div>
 
-<mat-spinner *ngIf="isLoading"></mat-spinner>
-
-<div class="content" fxLayout="row" *ngIf="!isLoading">
+<div class="content" fxLayout="row" >
     <div class="materials-box">
         <div class="bordered-box">
             <h1>Search Available Materials</h1>
-
+            
+            <mat-spinner *ngIf="isLoading"></mat-spinner>
             <!-- <hr style="width: 100%;"> -->
     
-            <app-materials-list [Items]="items">          
+            <app-materials-list [Items]="items" [viewOnly]=true *ngIf="!isLoading">          
             </app-materials-list>
         </div>
     </div>

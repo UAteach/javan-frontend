@@ -23,7 +23,8 @@
         <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element" class="action-link"> 
-            <a (click)="openDialog('Details-Add', element)">Details</a> | 
+                <a (click)="openDialog('Details', element)" *ngIf="viewOnly">View Details</a> | 
+                <a (click)="openDialog('Details-Add', element)" *ngIf="!viewOnly">Details</a> | 
             </td>
         </ng-container>
         
