@@ -1,6 +1,8 @@
 <div class="header">
-    <div class="header-left">
-       <p class="header-text" [routerLink]="['/materials/']"> &lt; Return to materials homepage</p> 
+    <div *ngIf="isAuthenticated"> 
+        <div class="header-left">
+            <p class="header-text" [routerLink]="['/materials/']"> &lt; Return to materials homepage</p> 
+         </div>
     </div>
 </div>
 
