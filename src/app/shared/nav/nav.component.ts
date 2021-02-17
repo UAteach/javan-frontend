@@ -20,14 +20,18 @@ export class NavComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._userService.userName.subscribe(name => this.userName = name);
+    let currentUrl = window.location.href.toLowerCase();
+    
+    if(!currentUrl.includes("inventory")){
+      this._userService.userName.subscribe(name => this.userName = name);
 
-    if(this._authService.isAuthenticated()){
-      //TODO: not being found on first login
-      var user = this._authService.getUserInfo();
-      this.userName = user.first_name;
-    }else{
-      this._router.navigateByUrl('/login');
+      if(this._authService.isAuthenticated()) {
+        //TODO: not being found on first login
+        var user = this._authService.getUserInfo();
+        this.userName = user.first_name;
+      }else {
+        this._router.navigateByUrl('/login');
+      }
     }
   }
 
@@ -35,5 +39,4 @@ export class NavComponent implements OnInit {
     this._authService.logout()
     this._router.navigateByUrl('/login');
   }
-
 }

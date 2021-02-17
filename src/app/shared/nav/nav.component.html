@@ -3,5 +3,6 @@
     
     <span class="nav-tool-items">
       <div (click)="logout()" *ngIf="userName">{{ userName }}</div>
+      <div [routerLink]="['/login/']" *ngIf="!userName">Login</div>
     </span>
 </mat-toolbar>

@@ -29,28 +29,28 @@ export class ApiService {
       }
     }
 
-    if (this._authService.isAuthenticated){
+    if (this._authService.isAuthenticated()){
       var headers_object = new HttpHeaders().set("Authorization", "JWT " + this._authService.getToken());
 
       return this.http.get<T>(this.getUrl(relativeUrl),
                         { params: httpParams, headers: headers_object });
     }else{
-      return null
+      return this.http.get<T>(this.getUrl(relativeUrl),
+                        { params: httpParams });
     }
   }
 
   post<T>(relativeUrl: string, body: any): Observable<T> {
     // return this.http.post<T>(this.getUrl(relativeUrl), body);
 
-    if (this._authService.isAuthenticated){
-      
+    if (this._authService.isAuthenticated()){
       let headers_object = new HttpHeaders()
               .set('Authorization', "JWT " + this._authService.getToken())
               .set('Content-Type', 'application/json'); 
 
       return this.http.post<T>(this.getUrl(relativeUrl), body, { headers: headers_object });
     }else{
-      return null
+      return this.http.post<T>(this.getUrl(relativeUrl), body);
     }
   }
 
