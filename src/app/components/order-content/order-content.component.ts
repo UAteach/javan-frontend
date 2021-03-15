@@ -70,4 +70,10 @@ export class OrderContentComponent implements OnInit {
     });
   }
 
+  //deleteRowData(row_obj){
+  //  this.orderContents.splice(row_obj, 1)
+  //    return true;
+  //  };
+  //}
+
 }

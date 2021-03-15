@@ -1,11 +1,10 @@
 <div class="header">
-
+    <h1>Available Materials</h1>
 </div>
 
 <div class="content" fxLayout="row">
     <div class="materials-box" fxFlex="80">
-        <h1>Available Materials</h1>
-
+            <!--<h1>Available Materials</h1>-->
         <hr style="width: 100%;">
 
         <app-materials-list [Items]="items" (ItemAdded)="updateOrderContents()">          
@@ -17,6 +16,7 @@
         </app-order-content>
     </div>
 </div>
+
 
 
 
